@@ -19,6 +19,7 @@
 
 windows_package node['mremoteng']['package_name'] do
   source node['mremoteng']['url']
+  checksum node['mremoteng']['checksum']
   options '/S'
   installer_type :custom
   action :install

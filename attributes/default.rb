@@ -18,4 +18,5 @@
 #
 
 default['mremoteng']['package_name'] = 'mRemoteNG'
-default['mremoteng']['url']          = "http://downloads.mremoteng.org/mRemoteNG-Installer-1.72.exe"
+default['mremoteng']['url']          = 'http://downloads.mremoteng.org/mRemoteNG-Installer-1.72.exe'
+default['mremoteng']['checksum']     = 'b2978c2512e5b5eb1d308ecff0494875670cc0b45e611484368ea434e47a83d4'
