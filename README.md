@@ -5,7 +5,7 @@ This cookbook will install mRemoteNG on a windows box.
 
 Requirements
 ------------
-Windows
+The cookbook depends on the windows cookbook
 
 
 Attributes
