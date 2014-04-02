@@ -27,11 +27,11 @@ end
 
 unless node['mremoteng']['shared_config_dir'].nil?
   hosts = search(:node, 'name:*')
-  hosts = hosts.sort_by { |host| host['hostname'] }
+  hosts = hosts.sort_by { |host| host['hostname'].to_s }
   environments = Hash.new
   hosts.each do |host|
     environments[host.chef_environment] = [] if environments[host.chef_environment].nil?
-    environments[host.chef_environment] << host
+    environments[host.chef_environment] << host unless host['hostname'].to_s == ''
   end
 
   directory node['mremoteng']['shared_config_dir']
