@@ -1,6 +1,6 @@
 sbp_mremoteng Cookbook
 ======================
-This cookbook will install mRemoteNG on a windows box.
+This cookbook will install mRemoteNG on a Windows box and will (optionally) generate the mRemoteNG config based on all available nodes in your Chef server.
 
 
 Requirements
@@ -10,8 +10,13 @@ The cookbook depends on the windows cookbook
 
 Attributes
 ----------
-default['mremoteng']['url']          = 'http://downloads.mremoteng.org/mRemoteNG-Installer-1.72.exe'
-default['mremoteng']['install_dir']  = 'C:\Program Files\mRemoteNG'
+When default['mremoteng']['shared_config_dir'] is set to `nil` the cookbook will not create a confCons.xml for you. When this is set to a path, it will generate a config and update the mRemoteNG config so it uses the generated configuration.
+
+default['mremoteng']['package_name']      = 'mRemoteNG'
+default['mremoteng']['url']               = 'http://downloads.mremoteng.org/mRemoteNG-Installer-1.72.exe'
+default['mremoteng']['checksum']          = 'b2978c2512e5b5eb1d308ecff0494875670cc0b45e611484368ea434e47a83d4'
+default['mremoteng']['install_dir']       = 'C:\Program Files\mRemoteNG'
+default['mremoteng']['shared_config_dir'] = nil
 
 
 Usage

@@ -20,7 +20,38 @@
 windows_package node['mremoteng']['package_name'] do
   source node['mremoteng']['url']
   checksum node['mremoteng']['checksum']
-  options '/S'
+  options "/S /D=#{node['mremoteng']['install_dir']}"
   installer_type :custom
   action :install
 end
+
+unless node['mremoteng']['shared_config_dir'].nil?
+  hosts = search(:node, 'name:*')
+  hosts = hosts.sort_by { |host| host['hostname'] }
+  environments = Hash.new
+  hosts.each do |host|
+    environments[host.chef_environment] = [] if environments[host.chef_environment].nil?
+    environments[host.chef_environment] << host
+  end
+
+  directory node['mremoteng']['shared_config_dir']
+
+  template "#{node['mremoteng']['shared_config_dir']}\\confCons.xml" do
+    source 'confCons.xml.erb'
+    variables(
+      :recipe_file => (__FILE__).to_s.split("cookbooks/").last,
+      :template_file => source.to_s,
+      :environments => environments
+    )
+  end
+
+  template "#{node['mremoteng']['install_dir']}\\mRemoteNG.exe.config" do
+    source 'mRemoteNG.exe.config.erb'
+    variables(
+      :recipe_file => (__FILE__).to_s.split("cookbooks/").last,
+      :template_file => source.to_s,
+      :shared_config_dir => node['mremoteng']['shared_config_dir']
+    )
+  end
+end
+
