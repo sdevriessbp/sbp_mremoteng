@@ -34,7 +34,9 @@ unless node['mremoteng']['shared_config_dir'].nil?
     environments[host.chef_environment] << host unless host['hostname'].to_s == ''
   end
 
-  directory node['mremoteng']['shared_config_dir']
+  directory node['mremoteng']['shared_config_dir'] do
+    recursive true
+  end
 
   template "#{node['mremoteng']['shared_config_dir']}\\confCons.xml" do
     source 'confCons.xml.erb'
