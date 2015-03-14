@@ -5,7 +5,7 @@ This cookbook will install mRemoteNG on a Windows box and will (optionally) gene
 
 Requirements
 ------------
-The cookbook depends on the windows cookbook
+The cookbook depends on the windows and partial_search cookbooks
 
 
 Attributes

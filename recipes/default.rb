@@ -2,8 +2,6 @@
 # Cookbook Name:: sbp_mremoteng
 # Recipe:: default
 #
-# Copyright 2014, Schubergp Philis
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -26,12 +24,21 @@ windows_package node['mremoteng']['package_name'] do
 end
 
 unless node['mremoteng']['shared_config_dir'].nil?
-  hosts = search(:node, 'name:*')
+  hosts = partial_search(:node, 
+                         "name:*",
+                         :keys => { 
+                           'hostname' => ['hostname'],
+                           'name' => ['name'],
+                           'os' => ['os'],
+                           'domain' => ['domain'],
+                           'chef_environment' => ['chef_environment'],
+                           'ipaddress' => ['ipaddress']
+                           })
   hosts = hosts.sort_by { |host| host['hostname'].to_s }
   environments = Hash.new
   hosts.each do |host|
-    environments[host.chef_environment] = [] if environments[host.chef_environment].nil?
-    environments[host.chef_environment] << host unless host['hostname'].to_s == ''
+    environments[host['chef_environment']] = [] if environments[host['chef_environment']].nil? 
+    environments[host['chef_environment']] << host unless host['hostname'].to_s == '' 
   end
 
   directory node['mremoteng']['shared_config_dir'] do
