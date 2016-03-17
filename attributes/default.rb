@@ -20,3 +20,4 @@ default['mremoteng']['url']               = 'http://downloads.mremoteng.org/mRem
 default['mremoteng']['checksum']          = 'b2978c2512e5b5eb1d308ecff0494875670cc0b45e611484368ea434e47a83d4'
 default['mremoteng']['install_dir']       = 'C:\Program Files\mRemoteNG'
 default['mremoteng']['shared_config_dir'] = nil
+default['mremoteng']['auto_expand']       = 'True'
