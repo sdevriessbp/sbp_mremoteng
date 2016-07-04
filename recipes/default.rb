@@ -19,6 +19,7 @@ windows_package node['mremoteng']['package_name'] do
   source node['mremoteng']['url']
   checksum node['mremoteng']['checksum']
   options "APPLICATIONROOTDIRECTORY=#{node['mremoteng']['install_dir']}"
+  version node['mremoteng']['version']
   installer_type :msi
   action :install
 end
